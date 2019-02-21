@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+# Boost, Armadillo, Turtle, Exprtk, OpenBLAS
+
 # Download needed packages from the Ubuntu repository
 RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev
 
@@ -13,3 +15,9 @@ RUN ln -s $(pwd)/cmake /usr/bin/cmake
 WORKDIR "/usr/include"
 RUN git clone https://github.com/mat007/turtle.git
 RUN git clone https://github.com/ArashPartow/exprtk.git
+
+RUN git clone https://github.com/xianyi/OpenBLAS.git
+WORKDIR "/usr/include/OpenBLAS"
+RUN cmake .
+RUN cmake --build .
+
