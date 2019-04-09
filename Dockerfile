@@ -4,7 +4,7 @@ FROM ubuntu:latest
 
 # Download needed packages from the Ubuntu repository
 RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev python3-pip
-RUN pip3 install scipy requests request datetime --upgrade
+RUN yes | pip3 install scipy requests request datetime --upgrade
 
 # Download the new version of CMake and "install" it
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.0-rc2/cmake-3.14.0-rc2-Linux-x86_64.sh
