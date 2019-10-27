@@ -3,7 +3,7 @@ FROM ubuntu:latest
 # Boost, Armadillo, Turtle, Exprtk, OpenBLAS
 
 # Download needed packages from the Ubuntu repository
-RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev python3-pip mpich
+RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev python3-pip mpich bison
 RUN yes | pip3 install scipy requests request datetime --upgrade
 
 # Download the new version of CMake and "install" it
@@ -24,4 +24,4 @@ RUN cmake --build .
 
 RUN git clone git clone -b maint https://gitlab.com/petsc/petsc.git petsc
 WORKDIR "/usr/include/petsc"
-RUN ./configure --download-mumps --download-pastix --download-superlu
+RUN ./configure --download-mumps --download-pastix --download-superlu --download-ptscotch
