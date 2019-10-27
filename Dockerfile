@@ -13,15 +13,18 @@ RUN yes | ./cmake-3.14.0-rc2-Linux-x86_64.sh
 WORKDIR "cmake-3.14.0-rc2-Linux-x86_64/bin"
 RUN ln -s $(pwd)/cmake /usr/bin/cmake
 
+WORKDIR "${HOME}"
+RUN git clone -b maint https://gitlab.com/petsc/petsc.git 
+WORKDIR "${HOME}/petsc"
+RUN ./configure --download-mumps --download-pastix --download-superlu --download-ptscotch --allow-run-as-root
+
 WORKDIR "/usr/include"
 RUN git clone https://github.com/mat007/turtle.git
 RUN git clone https://github.com/ArashPartow/exprtk.git
 
+WORKDIR "${HOME}"
 RUN git clone https://github.com/xianyi/OpenBLAS.git
-WORKDIR "/usr/include/OpenBLAS"
+WORKDIR "${HOME}/OpenBLAS"
 RUN cmake .
 RUN cmake --build .
 
-RUN git clone -b maint https://gitlab.com/petsc/petsc.git petsc
-WORKDIR "/usr/include/petsc"
-RUN ./configure --download-mumps --download-pastix --download-superlu --download-ptscotch --allow-run-as-root
