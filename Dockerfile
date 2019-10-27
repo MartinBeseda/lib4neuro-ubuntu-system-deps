@@ -9,7 +9,8 @@ RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make buil
 RUN yes | pip3 install scipy requests request datetime --upgrade
 
 USER myuser
-WORKDIR "${HOME}"
+RUN echo $HOME
+WORKDIR $HOME
 RUN $(pwd)
 
 # Download the new version of CMake and "install" it
