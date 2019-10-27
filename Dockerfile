@@ -22,6 +22,6 @@ WORKDIR "/usr/include/OpenBLAS"
 RUN cmake .
 RUN cmake --build .
 
-RUN git clone git clone -b maint https://gitlab.com/petsc/petsc.git 
+RUN git clone -b maint https://gitlab.com/petsc/petsc.git petsc
 WORKDIR "/usr/include/petsc"
 RUN ./configure --download-mumps --download-pastix --download-superlu --download-ptscotch --allow-run-as-root
