@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN adduser -D myuser
+RUN useradd -m -p pass myuser 
 
 # Boost, Armadillo, Turtle, Exprtk, OpenBLAS
 
