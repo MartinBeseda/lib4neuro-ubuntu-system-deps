@@ -8,7 +8,7 @@ RUN useradd -m -p pass myuser
 RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev python3-pip mpich bison flex
 RUN yes | pip3 install scipy requests request datetime --upgrade
 
-RUN mkdir /home/myuser
+RUN mkdir -p /home/myuser
 ENV HOME /home/myuser
 RUN echo $HOME
 WORKDIR $HOME
