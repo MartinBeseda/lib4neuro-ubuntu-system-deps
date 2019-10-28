@@ -12,7 +12,7 @@ USER myuser
 RUN echo $HOME
 ENV HOME /home/myuser
 WORKDIR $HOME
-RUN $(pwd)
+RUN echo "$(pwd)"
 
 # Download the new version of CMake and "install" it
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.0-rc2/cmake-3.14.0-rc2-Linux-x86_64.sh
