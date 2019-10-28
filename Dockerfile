@@ -8,9 +8,9 @@ RUN useradd -m -p pass myuser
 RUN apt-get clean && apt-get update && apt-get install -y -V apt-utils make build-essential g++-8 gfortran git libboost-all-dev wget libarmadillo-dev python3-pip mpich bison flex
 RUN yes | pip3 install scipy requests request datetime --upgrade
 
-USER myuser
-RUN echo $HOME
+RUN mkdir /home/myuser
 ENV HOME /home/myuser
+RUN echo $HOME
 WORKDIR $HOME
 RUN echo "$(pwd)"
 
@@ -20,6 +20,9 @@ RUN chmod +x cmake-*.sh
 RUN yes | ./cmake-3.14.0-rc2-Linux-x86_64.sh
 WORKDIR "cmake-3.14.0-rc2-Linux-x86_64/bin"
 RUN ln -s $(pwd)/cmake /usr/bin/cmake
+
+# Switching to a non-root user, as PETSc calls mpiexec, which doesn't allow superuser privileges by default
+USER myuser
 
 WORKDIR "${HOME}"
 RUN git clone -b maint https://gitlab.com/petsc/petsc.git 
