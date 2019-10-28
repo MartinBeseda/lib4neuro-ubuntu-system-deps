@@ -10,6 +10,7 @@ RUN yes | pip3 install scipy requests request datetime --upgrade
 
 USER myuser
 RUN echo $HOME
+ENV HOME /home/myuser
 WORKDIR $HOME
 RUN $(pwd)
 
@@ -23,7 +24,7 @@ RUN ln -s $(pwd)/cmake /usr/bin/cmake
 WORKDIR "${HOME}"
 RUN git clone -b maint https://gitlab.com/petsc/petsc.git 
 WORKDIR "${HOME}/petsc"
-RUN ./configure --download-mumps --download-pastix --download-superlu --download-ptscotch --with-clanguage=C++ 
+RUN ./configure --download-elemental --download-metis --download-parmetis --with-clanguage=C++
 RUN TMP=`find . -name 'petscconf.h' | tail -n 1` && TMP=`echo ${TMP%/include*}` && make PETSC_DIR=$(pwd) PETSC_ARCH=${TMP} all
 RUN TMP=`find . -name 'petscconf.h' | tail -n 1` && TMP=`echo ${TMP%/include*}` && make PETSC_DIR=$(pwd) PETSC_ARCH=${TMP} check
 
