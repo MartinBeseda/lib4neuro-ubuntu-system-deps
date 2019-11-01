@@ -15,10 +15,10 @@ WORKDIR $HOME
 RUN echo "$(pwd)"
 
 # Download the new version of CMake and "install" it
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.0-rc2/cmake-3.14.0-rc2-Linux-x86_64.sh
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc3/cmake-3.16.0-rc3-Linux-x86_64.sh
 RUN chmod +x cmake-*.sh
-RUN yes | ./cmake-3.14.0-rc2-Linux-x86_64.sh
-WORKDIR "cmake-3.14.0-rc2-Linux-x86_64/bin"
+RUN yes | ./cmake-3.16.0-rc3-Linux-x86_64.sh
+WORKDIR "cmake-3.16.0-rc3-Linux-x86_64/bin"
 RUN ln -s $(pwd)/cmake /usr/bin/cmake
 
 # Switching to a non-root user, as PETSc calls mpiexec, which doesn't allow superuser privileges by default
